@@ -1,0 +1,14 @@
+version: "2.1"
+
+services:
+  # REST API
+  webapi:
+    build: ./webapi
+    ports:
+      - "8501:8501"
+    links:
+      - database
+
+  # DATABASE
+  database:
+    build: ./database
