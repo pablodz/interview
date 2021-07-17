@@ -61,8 +61,9 @@ You'll see a similar shell
 > `http://0.0.0.0:5000/v1/api/1` # Returns cat with ID=1 <br>
 > `http://0.0.0.0:5000/v1/api/catname/michifuz` # Returns cat called 'michifuz'
 
+![](https://imgur.com/fuHFdN8.png)
 
-1. Open another shell and run tests, 4 in total (GET,POST,PUT,DELETE)
+4. Open another shell and run tests, 4 in total (GET,POST,PUT,DELETE)
 
 ```bash
 # install if necesary
