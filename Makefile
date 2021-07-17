@@ -22,7 +22,7 @@ help:  ## Show help message
 
 
 test:
-	cd backend && python3 -m unittest --buffer
+	cd backend && pytest
 
 # tox:  ## Run automatic tests on web
 # 	python -m tox
