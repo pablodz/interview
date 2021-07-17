@@ -17,6 +17,7 @@ Pablo Díaz
 - [x] Patrones de diseño
 - [x] Pruebas de API
 - [ ] Cobertura
+- [ ] JWT Authentication
 
 ## To replicate Microservice app
 
