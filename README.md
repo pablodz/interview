@@ -65,7 +65,9 @@ You'll see a similar shell
 1. Open another shell and run tests, 4 in total (GET,POST,PUT,DELETE)
 
 ```bash
-make test
+# install if necesary
+# pip3 install pytest
+make test # This script runs locally not dockerized
 ```
 
 ![](https://imgur.com/gt39l8d.png)
