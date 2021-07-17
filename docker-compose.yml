@@ -1,16 +1,43 @@
-version: "3.4"
+version: "3.7"
 
 services:
   # DATABASE
-  database:
+  db:
     extends:
-      file: database/db-service.yml
-      service: database_service
+      file: db/db-service.yml
+      service: db
 
+  
   # REST API
-  webapi:
-    build: ./webapi
+  web:
+    build: 
+      context: ./web
+      dockerfile: Dockerfile
+     
+    command: gunicorn --bind 0.0.0.0:8501 main:main
     ports:
       - "8501:8501"
-    links:
-      - database
+    environment:
+        MONGODB_HOST: mongodb
+        MONGODB_USERNAME: "interview"
+        MONGODB_PASSWORD: "interview"
+    depends_on: 
+        - db
+    volumes:
+        - appdata:/var/www/
+    networks:
+      - backend
+      - frontend
+
+
+networks:
+  backend:
+    driver: bridge
+  frontend:
+    driver: bridge
+
+volumes:
+  mongodbdata:
+    driver: local
+  appdata:
+    driver: local
