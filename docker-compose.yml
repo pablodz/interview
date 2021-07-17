@@ -1,41 +1,58 @@
-version: "3.7"
+version: "3.8"
 
 services:
   # DATABASE
-  db:
-    extends:
-      file: db/db-service.yml
-      service: db
+  mongodb:
+    image: mongo
+    container_name: mongo
 
-  
-  # REST API
-  web:
-    build: 
-      context: ./web
-      dockerfile: Dockerfile
-     
-    command: gunicorn --bind 0.0.0.0:8501 main:main
-    ports:
-      - "8501:8501"
     environment:
-        MONGODB_HOST: mongodb
-        MONGODB_USERNAME: "interview"
-        MONGODB_PASSWORD: "interview"
-    depends_on: 
-        - db
+      MONGO_INITDB_ROOT_USERNAME: "admin"
+      MONGO_INITDB_ROOT_PASSWORD: "password"
+      # MONGO_INITDB_DATABASE: admin
+      MONGODB_DATA_DIR: /data/db
+
     volumes:
-        - appdata:/var/www/
+      - mongodbdata:/data/db
+      - ./database/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+
     networks:
       - backend
-      - frontend
 
+    ports:
+      - "27017:27017"
+    
+    command: [--auth]
+    restart: unless-stopped
+
+  # REST API
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    command: gunicorn --bind 0.0.0.0:5000 app:app
+    ports:
+      - "5000:5000"
+    environment:
+      PORT_WEB: 5000
+      HOST_WEB: '0.0.0.0'
+      MONGODB_HOST: mongodb
+      MONGODB_USERNAME: "interview"
+      MONGODB_PASSWORD: "interview"
+      MONGO_INITDB_DATABASE: webapp
+    volumes:
+      - appdata:/var/www/
+    depends_on:
+      - mongodb
+    networks:
+      - frontend
+      - backend
 
 networks:
-  backend:
-    driver: bridge
   frontend:
     driver: bridge
-
+  backend:
+    driver: bridge
 volumes:
   mongodbdata:
     driver: local
