@@ -1,1 +1,2 @@
-FROM mongo:5.0
+# Get mongo latest
+FROM mongo:latest
