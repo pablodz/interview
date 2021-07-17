@@ -1,6 +1,20 @@
-version: "2.1"
+version: "2.2"
 
 services:
+  # DATABASE
+  database:
+    image: "mongo:latest"
+    container_name: "mongo-container"
+    environment:
+      - MONGO_INITDB_DATABASE=interview # Database's name
+      - MONGO_INITDB_ROOT_USERNAME=interview # Username
+      - MONGO_INITDB_ROOT_PASSWORD=interviewpass # Password
+    volumes: # DATABASE STORE 
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      - ./mongo-volume:/data/db
+    ports:
+      - "27017-27019:27017-27019" # Ports
+
   # REST API
   webapi:
     build: ./webapi
@@ -8,7 +22,3 @@ services:
       - "8501:8501"
     links:
       - database
-
-  # DATABASE
-  database:
-    build: ./database
