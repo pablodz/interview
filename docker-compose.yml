@@ -1,19 +1,11 @@
-version: "2.2"
+version: "3.4"
 
 services:
   # DATABASE
   database:
-    image: "mongo:latest"
-    container_name: "mongo-container"
-    environment:
-      - MONGO_INITDB_DATABASE=interview # Database's name
-      - MONGO_INITDB_ROOT_USERNAME=interview # Username
-      - MONGO_INITDB_ROOT_PASSWORD=interviewpass # Password
-    volumes: # DATABASE STORE 
-      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
-      - ./mongo-volume:/data/db
-    ports:
-      - "27017-27019:27017-27019" # Ports
+    extends:
+      file: database/db-service.yml
+      service: database_service
 
   # REST API
   webapi:
