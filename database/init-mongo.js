@@ -12,4 +12,4 @@ db.createUser({
 });
 
 
-// db.createCollection('cats');
+db.createCollection('cats');
