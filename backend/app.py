@@ -5,10 +5,8 @@ from flask import Flask, jsonify, redirect, request, url_for
 from flask.templating import render_template
 from flask_pymongo import PyMongo
 from flask_restful import Api, Resource
-from flask_docs import ApiDoc
 
-from _constants import (COLLECTION_DEFAULT, DATABASE_DEFAULT,
-                        HOST_WEB, LIMIT_QUERY, MONGO_URI, PORT_WEB)
+from _constants import HOST_WEB, LIMIT_QUERY, PORT_WEB
 from _index import Index
 
 # Configs
@@ -128,7 +126,6 @@ class CatResource(Resource):
 
 # Endpoints
 api = Api(app)
-ApiDoc(app)  # Documentation
 # api.add_resource(HomePage, '/') # HomePage
 api.add_resource(Index, "/", endpoint="index")
 api.add_resource(CatResource, "/v1/api", endpoint="cats")

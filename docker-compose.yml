@@ -21,7 +21,7 @@ services:
 
     ports:
       - "27017:27017"
-    
+
     command: [--auth]
     restart: unless-stopped
 
@@ -35,7 +35,7 @@ services:
       - "5000:5000"
     environment:
       PORT_WEB: 5000
-      HOST_WEB: '0.0.0.0'
+      HOST_WEB: "0.0.0.0"
       MONGODB_HOST: mongodb
       MONGODB_USERNAME: "interview"
       MONGODB_PASSWORD: "interview"

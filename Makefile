@@ -21,6 +21,9 @@ help:  ## Show help message
 	echo "To run a command execute like the example\n>>>make run"
 
 
+test:
+	cd backend && python3 -m unittest --buffer
+
 # tox:  ## Run automatic tests on web
 # 	python -m tox
 # 	ls -la	
