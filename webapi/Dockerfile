@@ -17,10 +17,10 @@ COPY . .
 RUN python --version
 
 # Run the main (DEBUG - WITHOUT WSGI)
-#  CMD [ "python", "main.py" ]
+CMD [ "python", "main.py" ]
 
-# Run the main (PRODU - WITH WSGI)
-ENTRYPOINT [ "./gunicorn.sh" ]
+# Run the main (PRODU - WITH WSGI) [BROKEN]
+# ENTRYPOINT [ "bash","./gunicorn.sh" ]
 
 # Open ports
 EXPOSE 80
