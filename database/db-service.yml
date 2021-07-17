@@ -2,16 +2,17 @@
 services:
   # DATABASE
   database_service:
-    container_name: mongocont
     image: mongo:latest
     restart: always
     ports:
-      - "27017-27019:27017-27019" # Ports
+      - 27017:27017
+      - 27018:27018
+      - 27019:27019
 
     environment:
-      MONGO_INITDB_DATABASE: interview # Database's name
-      MONGO_INITDB_ROOT_USERNAME: interview # Username
-      MONGO_INITDB_ROOT_PASSWORD: interviewpass # Password
+      MONGO_INITDB_ROOT_DATABASE: rootdb
+      MONGO_INITDB_ROOT_USERNAME: interview
+      MONGO_INITDB_ROOT_PASSWORD: interview
 
     volumes: # DATABASE STORE
       - ./docker-entrypoint-initdb.d/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
