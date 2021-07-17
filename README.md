@@ -1,8 +1,36 @@
 # Interview Vozy
 
-First commit
+Pablo Díaz
 
-## Run Microservice app
+## Requirements
+
+- Docker
+- Docker-compose
+
+## Tasks already done
+
+- [x] Código fuente
+- [x] Archivos docker
+- [x] docker compose
+- [x] README.md
+- [x] Estructuración de proyecto
+- [x] Patrones de diseño
+- [x] Pruebas de API
+- [ ] Cobertura
+
+## To replicate Microservice app
+
+Python REST/API based with mongoDB that stores cats information, like the line bellow:
+
+```json
+{
+    "catid": "1",
+    "catname": "michifuz"
+}
+```
+
+![](https://imgur.com/c821a4A.png)
+
 
 1. Clone the repository
 
@@ -11,25 +39,33 @@ git clone https://github.com/pablodz/interview
 cd interview
 ```
 
-2. Build the dockerfiles
-
-```bash
-sudo docker-compose build
-```
-
-> To use port 80 (production) under ubuntu, we need to use sudo
-
-3. Wakeup web and database services
-
-```bash
-sudo docker-compose up
-# Then check localhost:8501
-```
-
-### To run with Makefile
-
+2. Install basic dependencies
 ```bash
 sudo apt-get install build-essential
-# Then something like this
+# To run makefiles
 make help
 ```
+
+3. Build and wake-up the services
+
+```bash
+make run
+```
+
+You'll see a similar shell
+
+![](https://imgur.com/ryrUhPN.png)
+
+> ENDPOINTS EXAMPLE: <br>
+> `http://0.0.0.0:5000/v1/api` # Returns all cats in JSON <br>
+> `http://0.0.0.0:5000/v1/api/1` # Returns cat with ID=1 <br>
+> `http://0.0.0.0:5000/v1/api/catname/michifuz` # Returns cat called 'michifuz'
+
+
+1. Open another shell and run tests, 4 in total (GET,POST,PUT,DELETE)
+
+```bash
+make test
+```
+
+![](https://imgur.com/gt39l8d.png)

@@ -2,3 +2,6 @@ flask
 gunicorn
 flask_pymongo
 flask-restful
+requests
+pytest
+pytest-html
